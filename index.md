@@ -7,7 +7,7 @@ It can scan for multiple objects.
 This page will focus on 2 main ways to create a shape cast and how to use it.
 
 <p align="center" width="100%">
-<img src="assets/GodotLogo.png" width="40%">
+<img src="assets/ShapeCastGraphic.png" width="40%">
 </p>
 
 <br>
