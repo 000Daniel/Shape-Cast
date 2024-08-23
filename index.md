@@ -77,6 +77,7 @@ public async override void _Ready() // THIS IS GOOD CODE, FEEL FREE TO COPY ;)
 <br>
 
 ### Result
+
 |Type|Information|Description|
 |:---|:---|:---|
 |Vector3|position|the position where the shapes collided.|
