@@ -2,9 +2,9 @@
     <h1 align="center"> Introduction <img id="header-img" src="assets/CsharpLogo_s.png" width="4%" style="padding: 0px 5px;"> <img id="header-img" src="assets/GodotLogo_s.png" width="4%" style="padding: 0px 5px;"></h1>
 </p>
 
-Shape cast detects collision objects within its designated region shape. 
-It can scan for multiple objects.
-This page will focus on 2 main ways to create a shape cast and how to use it.
+Shape cast detects collision objects within its designated region shape. <br>
+It can scan for multiple objects. <br>
+This page will focus on two main ways to create and use a shape cast.
 
 <p align="center" width="100%">
 <img src="assets/ShapeCastGraphic.png" width="40%">
@@ -14,7 +14,7 @@ This page will focus on 2 main ways to create a shape cast and how to use it.
 
 ## First method: ShapeCast3D Node
 A node that constantly sweeps a region of space to detect collisions. <br>
-This node is useful to easily visualize the detection area and easily interacting with the collided objects. <br>
+With this node its easy to visualize exactly where the sweep region is.
 
 <br>
 
@@ -72,7 +72,7 @@ public async override void _Ready() // THIS IS GOOD CODE, FEEL FREE TO COPY ;)
     }
 }
 ```
-*Note:* To get more information change the string “collider” in result[“collider”].
+*Note:* To get different information change the “collider” string in result[“collider”].
 
 <br>
 
@@ -179,12 +179,13 @@ RigidBody3D ignoreThis = GetParent<RigidBody3D>();
 query.Exclude = new Godot.Collections.Array<Rid> { ignoreThis.GetRid() };
 ```
 *The exceptions array can contain objects or RIDs.* <br>
-*Note: the ‘GetRid()’ method only works in classes that inherit from CharacterBody3D, StaticBody3D and more.* <br>
+*Note: the ‘GetRid()’ method only works in classes that inherit from CharacterBody3D, StaticBody3D and such.* <br>
 
 <br>
 
 ### Collision Mask
-In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use a collision mask. <br>
+In some cases using the Exception property could become inconvenient when excluding a lot of objects, <br>
+so instead we can use a collision mask. <br>
 In this example the query will only detect objects in Layer 1:
 ```cs
 query.CollisionMask = 1;
