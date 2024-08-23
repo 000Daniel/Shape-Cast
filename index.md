@@ -32,7 +32,7 @@ To check whether the shape cast detected anything we can run this code:
 ```cs
 public override void _Process(double delta)
 {
-    GD.Print(CollisionResult);
+    GD.Print(CollisionResult);
 }
 ```
 *CollisionResult* is an [Array](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays) of [dictionaries](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0) which contains all the information about the collider the shape cast detected. <br>
@@ -40,10 +40,10 @@ For example, the next code prints all of the names of the objects that were dete
 ```cs
 public override void _Process(double delta)
 {
-    foreach (Dictionary result in CollisionResult)
-    {
-        GD.Print(((Node3D)result["collider"]).Name);
-    }
+    foreach (Dictionary result in CollisionResult)
+    {
+        GD.Print(((Node3D)result["collider"]).Name);
+    }
 }
 ```
 
@@ -54,22 +54,22 @@ There’s an issue with The ShapeCast3D node, where it won’t detect any collid
 ```cs
 public override void _Ready() // THIS IS BAD CODE DO NOT COPY
 {
-    foreach (Dictionary result in CollisionResult)
-    {
-        GD.Print(((Node3D)result["collider"]).Name);
-    }
+    foreach (Dictionary result in CollisionResult)
+    {
+        GD.Print(((Node3D)result["collider"]).Name);
+    }
 }
 ```
 To fix this, turn _Ready() to an [async](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async) method and wait for 1 frame, like this:
 ```cs
 public async override void _Ready() // THIS IS GOOD CODE, FEEL FREE TO COPY ;)
 {
-    await ToSignal(GetTree().CreateTimer(0),"timeout");
-    
-    foreach (Dictionary result in CollisionResult)
-    {
-        GD.Print(((Node3D)result["collider"]).Name);
-    }
+    await ToSignal(GetTree().CreateTimer(0),"timeout");
+    
+    foreach (Dictionary result in CollisionResult)
+    {
+        GD.Print(((Node3D)result["collider"]).Name);
+    }
 }
 ```
 *Note:* To get different information change the “collider” string in result[“collider”].
@@ -100,8 +100,8 @@ First declare the [Shape3D](https://docs.godotengine.org/en/stable/classes/class
 ```cs
 public void Scan_Collisions()
 {
-    var box = new BoxShape3D();
-    box.Size = new Vector3(1,1,1);
+    var box = new BoxShape3D();
+    box.Size = new Vector3(1,1,1);
 }
 ```
 
@@ -113,10 +113,10 @@ Before casting a shape we need to reference this class: <br>
 ```cs
 public void Scan_Collisions()
 {
-    var box = new BoxShape3D();
-    box.Size = new Vector3(1,1,1);
+    var box = new BoxShape3D();
+    box.Size = new Vector3(1,1,1);
 
-    var spaceState = GetWorld3D().DirectSpaceState;
+    var spaceState = GetWorld3D().DirectSpaceState;
 }
 ```
 *spaceState represents the interactions of objects and their state in our World3D.*
@@ -128,23 +128,23 @@ To represent the Shape Cast and its properties use [PhysicsShapeQueryParameters3
 ```cs
 public void Scan_Collisions()
 {
-    var box = new BoxShape3D();
-    box.Size = new Vector3(1,1,1);
+    var box = new BoxShape3D();
+    box.Size = new Vector3(1,1,1);
 
-    var spaceState = GetWorld3D().DirectSpaceState;
-    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
+    var spaceState = GetWorld3D().DirectSpaceState;
+    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
 }
 ```
 Set the query’s shape:
 ```cs
 public void Scan_Collisions()
 {
-    var box = new BoxShape3D();
-    box.Size = new Vector3(1,1,1);
+    var box = new BoxShape3D();
+    box.Size = new Vector3(1,1,1);
 
-    var spaceState = GetWorld3D().DirectSpaceState;
-    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
-    query.Shape = box;
+    var spaceState = GetWorld3D().DirectSpaceState;
+    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
+    query.Shape = box;
 }
 ```
 *(Alternatively, instead of creating a shape in code, it is possible to take a shape from a separate node such as CollisionShape3D)*
@@ -156,15 +156,15 @@ Finally make the query sweep for collisions in our spaceState and print it:
 ```cs
 public void Scan_Collisions()
 {
-    var box = new BoxShape3D();
-    box.Size = new Vector3(1,1,1);
+    var box = new BoxShape3D();
+    box.Size = new Vector3(1,1,1);
 
-    var spaceState = GetWorld3D().DirectSpaceState;
-    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
-    query.Shape = box;
-    var results = spaceState.IntersectShape(query);
+    var spaceState = GetWorld3D().DirectSpaceState;
+    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
+    query.Shape = box;
+    var results = spaceState.IntersectShape(query);
 
-    GD.Print(results);
+    GD.Print(results);
 }
 ```
 **Note: the ‘results’ variable is the same as ‘CollisionResult’ from the previous section.**
@@ -203,12 +203,12 @@ In a _Ready() method, unlike a ShapeCast3D node that will not detect anything un
 ```cs
 public override void _Ready()
 {
-    var spaceState = GetWorld3D().DirectSpaceState;
-    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
-    query.Shape = new BoxShape3D{Size = new Vector3(1,1,1)};
-    var results = spaceState.IntersectShape(query);
+    var spaceState = GetWorld3D().DirectSpaceState;
+    PhysicsShapeQueryParameters3D query = new PhysicsShapeQueryParameters3D();
+    query.Shape = new BoxShape3D{Size = new Vector3(1,1,1)};
+    var results = spaceState.IntersectShape(query);
 
-    GD.Print(results);
+    GD.Print(results);
 }
 ```
 
